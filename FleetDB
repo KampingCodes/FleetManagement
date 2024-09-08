@@ -1,0 +1,54 @@
+CREATE DATABASE FleetManagementDB;
+USE FleetManagementDB;
+
+CREATE TABLE User (
+    UserID INT AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    userPassword VARCHAR(100),
+    PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Driver (
+    DriverID INT AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Address VARCHAR(255),
+    City VARCHAR(50),
+    State VARCHAR(50),
+    ZipCode VARCHAR(10),
+        PRIMARY KEY (DriverID)
+);
+
+CREATE TABLE Vehicle (
+    VehicleID INT AUTO_INCREMENT,
+    VehicleModel VARCHAR(100),
+    RegistrationNum VARCHAR(20),
+    ModYear INT,
+    DriverID INT,
+        PRIMARY KEY (VehicleID),
+    FOREIGN KEY (DriverID) REFERENCES Driver(DriverID)
+);
+
+CREATE TABLE Member (
+    MemberID INT AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Address VARCHAR(255),
+    City VARCHAR(50),
+    State VARCHAR(50),
+    ZipCode VARCHAR(10),
+        PRIMARY KEY (MemberID)
+);
+
+CREATE TABLE Assignment (
+    AssignmentID INT AUTO_INCREMENT,
+    MemberID INT,
+    VehicleID INT,
+    AssignmentDate DATE,
+    ReturnDate DATE,
+        PRIMARY KEY (AssignmentID),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID),
+    FOREIGN KEY (VehicleID) REFERENCES Vehicle(VehicleID)
+);
